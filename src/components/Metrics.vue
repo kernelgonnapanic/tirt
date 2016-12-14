@@ -1,33 +1,30 @@
 <template>
-  <main>
-    <span v-for="(val, key) in props">{{key}} - {{val}}</span>
-  </main>
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Property</th>
+        <th class="mdl-data-table__cell--non-numeric">Value</th>
+      </tr>
+    </thead>
+    <tbody v-for="(val, key) in properties">
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">{{key}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{val}}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
-import 'clientjs';
 
 export default {
   name: 'metrics',
-  data() {
-    return {
-      client: new window.ClientJS(),
-    };
-  },
-  computed: {
-    props: function props() {
-      return Object.keys(window.ClientJS.prototype).reduce((acc, key) => ({
-        ...acc,
-        [key]: this.client[key](),
-      }), {});
-    },
-  },
+  props: ['socket', 'properties'],
 };
 </script>
 
 <style scoped>
-main {
-  display: flex;
-  flex-direction: column;
+.mdl-data-table {
+  top: 65px;
 }
 </style>
