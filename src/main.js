@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 import Metrics from './components/Metrics';
 import Devices from './components/Devices';
 
-const socket = io('localhost:3002');
+const socket = io('192.168.1.128:3002');
 
 Vue.use(VueRouter);
 
@@ -26,6 +26,12 @@ new Vue({
       socket,
       client: new window.ClientJS(),
     };
+  },
+  created() {
+    this.socket.emit('newClient', this.properties);
+    window.addEventListener('unload', () => {
+      this.socket.emit('close', this.properties);
+    });
   },
   computed: {
     properties() {
@@ -55,8 +61,8 @@ new Vue({
           </div>
         </header>
       </div>
-      <main class="mdl-layout__content">
-        <div class="page-content">
+      <main>
+        <div>
           <router-view class="view" :properties="properties" :socket="socket"></router-view>
         </div>
       </main>
