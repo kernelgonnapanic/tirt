@@ -18,6 +18,7 @@ import Modal from './Modal';
 
 export default {
   name: 'devices',
+  props: ['devices', 'properties'],
   components: {
     Device,
     Modal,
@@ -35,19 +36,9 @@ export default {
   },
   data() {
     return {
-      devices: [],
       modalOpened: false,
       selectedItem: null,
     };
-  },
-  props: ['socket', 'properties'],
-  created() {
-    console.log('created');
-    this.socket.on('devices', (devices) => {
-      console.log('devices', devices);
-      this.devices = devices;
-    });
-    this.socket.emit('getDevices');
   },
 };
 </script>
