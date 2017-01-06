@@ -10,10 +10,10 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
-  base: __dirname,
+  base: '/tirt',
   routes: [
-    { path: '/', component: Devices },
-    { path: '/metrics', component: Metrics },
+    { path: '/', name: 'devices', component: Devices },
+    { path: '/metrics', name: 'metrics', component: Metrics },
   ],
 });
 

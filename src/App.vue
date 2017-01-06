@@ -5,10 +5,10 @@
         <div class="mdl-layout__header-row">
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
-            <router-link tag="a" class="mdl-navigation__link" to="/metrics">
+            <router-link tag="a" class="mdl-navigation__link" :to="{name: 'metrics'}">
               Metrics
             </router-link>
-            <router-link tag="a" class="mdl-navigation__link" to="/">
+            <router-link tag="a" class="mdl-navigation__link" :to="{name: 'devices'}">
               Devices
             </router-link>
           </nav>
