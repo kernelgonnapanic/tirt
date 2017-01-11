@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     openModal(idx) {
-      console.log('open modal');
       this.modalOpened = true;
       this.selectedItem = this.devices[idx];
     },

@@ -27,8 +27,9 @@
 import 'clientjs';
 import io from 'socket.io-client';
 import { remove } from 'lodash';
+import acquireIdForBrowser from './services/localstorage';
 
-const socket = io('https://tirt-server.herokuapp.com');
+const socket = io('localhost:5000');
 
 /* eslint-disable no-new */
 export default {
@@ -40,7 +41,8 @@ export default {
     };
   },
   created() {
-    this.socket.emit('newClient', this.properties);
+    const id = acquireIdForBrowser(this.properties.getFingerprint);
+    this.socket.emit('newClient', { hash: id, ...this.properties });
 
     this.socket.on('devices', (devices) => {
       this.devices = devices;
@@ -50,8 +52,8 @@ export default {
       this.devices.push(device);
     });
 
-    this.socket.on('removeDevice', (deviceId) => {
-      remove(this.devices, d => d.id === deviceId);
+    this.socket.on('removeDevice', (deviceHash) => {
+      remove(this.devices, d => d.hash === deviceHash);
     });
   },
   computed: {
