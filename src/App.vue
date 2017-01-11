@@ -29,7 +29,7 @@ import io from 'socket.io-client';
 import { remove } from 'lodash';
 import acquireIdForBrowser from './services/localstorage';
 
-const socket = io('localhost:5000');
+const socket = io('https://tirt-server.herokuapp.com');
 
 /* eslint-disable no-new */
 export default {
